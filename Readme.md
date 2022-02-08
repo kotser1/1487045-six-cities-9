@@ -1,6 +1,6 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Сергей Котельников](https://up.htmlacademy.ru/react/9/user/1487045).
+* Студент: [Сергей Котельников](https://htmlacademy.ru/profile/id1487045).
 * Наставник: [Артём Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
