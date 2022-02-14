@@ -2,9 +2,10 @@ import Card from '../card/card';
 
 type MainPageProps = {
   offersCount: number;
+  displayedOffersCount: number;
 }
 
-function MainPage({offersCount}: MainPageProps): JSX.Element {
+function MainPage({offersCount, displayedOffersCount}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -94,11 +95,7 @@ function MainPage({offersCount}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {[...Array(displayedOffersCount).keys()].map((item) => <Card key={item} />)}
               </div>
             </section>
             <div className="cities__right-section">
