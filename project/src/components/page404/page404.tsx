@@ -1,13 +1,18 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
+import './page404.css';
+
 function Page404() {
   return (
-    <div className="page page--favorites-empty">
+    <div className="page page--not-found">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to={AppRoute.Root}>
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -29,53 +34,22 @@ function Page404() {
         </div>
       </header>
 
-      <main
-        style={{
-          display: 'flex',
-          flexGrow: '1',
-        }}
-      >
-        <div className="container" style={{display: 'flex'}}>
-          <section
-            style={{
-              width: '100%',
-              padding: '0px 0px 93px 38px',
-              borderBottom: '2px solid rgba(222,222,222,.5)',
-            }}
-          >
+      <main className="page__main page__main--not-found">
+        <div className="not-found-container container">
+          <section className="not-found">
             <h1 className="visually-hidden">Page not found.</h1>
-            <div
-              style={{
-                width: '420px',
-                marginTop: '16.7vh',
-                marginRight: 'auto',
-                marginLeft: 'auto',
-                paddingTop: '94px',
-                textAlign: 'center',
-                backgroundImage: 'url("../img/ico-no-results.svg")',
-                backgroundSize: '60px 60px',
-                backgroundPosition: 'center top',
-                backgroundRepeat: 'no-repeat'}}
-            >
-              <b style={{
-                display: 'block',
-                marginBottom: '5px',
-                fontSize: '32px',
-                lineHeight: '1.1875',
-              }}
-              >
-                Error 404
-              </b>
-              <p>Page not found.</p><br />
-              <a href="/">Go back to <b>main page</b>.</a>
+            <div className='not-found__status-wrapper'>
+              <b className="not-found__status">Error 404</b>
+              <p className='not-found__status-description'>Page not found.</p><br />
+              <Link to={AppRoute.Root}>Go back to <b>main page</b>.</Link>
             </div>
           </section>
         </div>
       </main>
       <footer className="footer">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.Root}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   );
