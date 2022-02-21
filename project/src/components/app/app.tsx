@@ -1,10 +1,10 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 
-import MainPage from '../main-page/main-page';
-import Login from '../login/login';
-import Favorites from '../favorites/favorites';
-import Property from '../property/property';
-import Page404 from '../page404/page404';
+import MainPage from '../../pages/main-page/main-page';
+import Login from '../../pages/login/login';
+import Favorites from '../../pages/favorites/favorites';
+import Property from '../../pages/property/property';
+import Page404 from '../../pages/page404/page404';
 import PrivateRoute from '../private-route/private-route';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
