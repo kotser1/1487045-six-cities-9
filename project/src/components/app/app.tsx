@@ -20,7 +20,12 @@ function App({offersCount, displayedOffersCount}: AppProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainPage offersCount={offersCount} displayedOffersCount={displayedOffersCount} />}
+          element={(
+            <MainPage
+              offersCount={offersCount}
+              displayedOffersCount={displayedOffersCount}
+            />
+          )}
         />
         <Route
           path={AppRoute.Login}
@@ -28,11 +33,11 @@ function App({offersCount, displayedOffersCount}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.Favorites}
-          element={
+          element={(
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
               <Favorites />
             </PrivateRoute>
-          }
+          )}
         />
         <Route
           path={AppRoute.Property}
