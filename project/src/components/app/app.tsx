@@ -8,13 +8,14 @@ import Page404 from '../../pages/page404/page404';
 import PrivateRoute from '../private-route/private-route';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { Offer } from '../../types/offer';
 
 type AppProps = {
   offersCount: number;
-  displayedOffersCount: number;
+  offers: Offer[];
 }
 
-function App({offersCount, displayedOffersCount}: AppProps): JSX.Element {
+function App({offersCount, offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +24,7 @@ function App({offersCount, displayedOffersCount}: AppProps): JSX.Element {
           element={(
             <MainPage
               offersCount={offersCount}
-              displayedOffersCount={displayedOffersCount}
+              offers={offers}
             />
           )}
         />
