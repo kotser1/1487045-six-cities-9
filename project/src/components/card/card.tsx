@@ -1,3 +1,4 @@
+import PremiumSticker from '../premium-sticker/premium-sticker';
 import { Offer } from '../../types/offer';
 
 type CardProps = {
@@ -13,11 +14,7 @@ function Card({offer, onActiveCardChange}: CardProps): JSX.Element {
       onMouseEnter={() => onActiveCardChange(id)}
       onMouseLeave={() => onActiveCardChange(null)}
     >
-      {isPremium && (
-        <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
-      )}
+      {isPremium && (<PremiumSticker />)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
@@ -43,7 +40,7 @@ function Card({offer, onActiveCardChange}: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{offer.title}</a>
+          <a href="/#">{title}</a>
         </h2>
         <p className="place-card__type">{type[0].toUpperCase() + type.slice(1)}</p>
       </div>
