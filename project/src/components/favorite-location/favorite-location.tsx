@@ -1,4 +1,3 @@
-// import FavoriteCard from '../favorite-card/favorite-card';
 import { Offer } from '../../types/offer';
 import FavoriteCard from '../favorite-card/favorite-card';
 
