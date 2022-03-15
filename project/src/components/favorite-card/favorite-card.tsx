@@ -1,19 +1,21 @@
+import { Link } from 'react-router-dom';
 import PremiumSticker from '../premium-sticker/premium-sticker';
 import { Offer } from '../../types/offer';
+import { AppRoute } from '../../const';
 
 type FavoriteCardProps = {
   offer: Offer;
 };
 
 function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
-  const {isPremium, previewImage, title, price, rating, type} = offer;
+  const {isPremium, previewImage, title, price, rating, type, id} = offer;
   return (
     <article className="favorites__card place-card">
       {isPremium && (<PremiumSticker />)}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="/#">
+        <Link to={`${AppRoute.Property}${id}`}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt={title} />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -35,7 +37,7 @@ function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{title}</a>
+          <Link to={`${AppRoute.Property}${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type[0].toUpperCase() + type.slice(1)}</p>
       </div>
