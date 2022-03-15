@@ -1,5 +1,8 @@
+import { Link } from 'react-router-dom';
+
 import PremiumSticker from '../premium-sticker/premium-sticker';
 import { Offer } from '../../types/offer';
+import { AppRoute } from '../../const';
 
 type CardProps = {
   offer: Offer;
@@ -16,9 +19,9 @@ function Card({offer, onActiveCardChange}: CardProps): JSX.Element {
     >
       {isPremium && (<PremiumSticker />)}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="/#">
+        <Link to={`${AppRoute.Property}${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -40,7 +43,7 @@ function Card({offer, onActiveCardChange}: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{title}</a>
+          <Link to={`${AppRoute.Property}${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type[0].toUpperCase() + type.slice(1)}</p>
       </div>
