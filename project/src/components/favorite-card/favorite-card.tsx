@@ -11,9 +11,9 @@ function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
   const {isPremium, previewImage, title, price, rating, type, id} = offer;
   return (
     <article className="favorites__card place-card">
-      {isPremium && (<PremiumSticker />)}
+      {isPremium && (<PremiumSticker className='place-card__mark'/>)}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Property}${id}`}>
+        <Link to={`${AppRoute.Property}/${id}`}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt={title} />
         </Link>
       </div>
@@ -37,7 +37,7 @@ function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Property}${id}`}>{title}</Link>
+          <Link to={`${AppRoute.Property}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type[0].toUpperCase() + type.slice(1)}</p>
       </div>

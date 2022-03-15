@@ -9,13 +9,15 @@ import PrivateRoute from '../private-route/private-route';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 type AppProps = {
   offersCount: number;
   offers: Offer[];
+  reviews: Review[];
 }
 
-function App({offersCount, offers}: AppProps): JSX.Element {
+function App({offersCount, offers, reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -40,10 +42,17 @@ function App({offersCount, offers}: AppProps): JSX.Element {
             </PrivateRoute>
           )}
         />
-        <Route
-          path={AppRoute.Property}
-          element={<Property />}
-        />
+        <Route path={AppRoute.Property}>
+          <Route
+            path={AppRoute.PropertyId}
+            element={
+              <Property
+                offers={offers}
+                reviews={reviews}
+              />
+            }
+          />
+        </Route>
         <Route
           path='*'
           element={<Page404 />}

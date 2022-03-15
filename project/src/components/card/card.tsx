@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import PremiumSticker from '../premium-sticker/premium-sticker';
+
 import { Offer } from '../../types/offer';
 import { AppRoute } from '../../const';
 
@@ -17,9 +18,9 @@ function Card({offer, onActiveCardChange}: CardProps): JSX.Element {
       onMouseEnter={() => onActiveCardChange(id)}
       onMouseLeave={() => onActiveCardChange(null)}
     >
-      {isPremium && (<PremiumSticker />)}
+      {isPremium && (<PremiumSticker className='place-card__mark'/>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Property}${id}`}>
+        <Link to={`${AppRoute.Property}/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
         </Link>
       </div>
@@ -43,7 +44,7 @@ function Card({offer, onActiveCardChange}: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Property}${id}`}>{title}</Link>
+          <Link to={`${AppRoute.Property}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type[0].toUpperCase() + type.slice(1)}</p>
       </div>
