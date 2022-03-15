@@ -8,13 +8,16 @@ import Page404 from '../../pages/page404/page404';
 import PrivateRoute from '../private-route/private-route';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 type AppProps = {
   offersCount: number;
-  displayedOffersCount: number;
+  offers: Offer[];
+  reviews: Review[];
 }
 
-function App({offersCount, displayedOffersCount}: AppProps): JSX.Element {
+function App({offersCount, offers, reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +26,7 @@ function App({offersCount, displayedOffersCount}: AppProps): JSX.Element {
           element={(
             <MainPage
               offersCount={offersCount}
-              displayedOffersCount={displayedOffersCount}
+              offers={offers}
             />
           )}
         />
@@ -34,15 +37,22 @@ function App({offersCount, displayedOffersCount}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={(
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <Favorites />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <Favorites offers={offers} />
             </PrivateRoute>
           )}
         />
-        <Route
-          path={AppRoute.Property}
-          element={<Property />}
-        />
+        <Route path={AppRoute.Property}>
+          <Route
+            path={AppRoute.PropertyId}
+            element={
+              <Property
+                offers={offers}
+                reviews={reviews}
+              />
+            }
+          />
+        </Route>
         <Route
           path='*'
           element={<Page404 />}
