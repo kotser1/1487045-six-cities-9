@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Header from '../../components/header/header';
 import PremiumSticker from '../../components/premium-sticker/premium-sticker';
