@@ -1,13 +1,18 @@
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
+import Map from '../../components/map/map';
+
 import { Offer } from '../../types/offer';
+import { CITIES } from '../../const';
 
 type MainPageProps = {
-  offersCount: number;
   offers: Offer[];
 }
 
-function MainPage({offersCount, offers}: MainPageProps): JSX.Element {
+function MainPage({offers}: MainPageProps): JSX.Element {
+  const currentCity = CITIES.Amsterdam;
+  const offersInCurrentCity = offers.filter((offer) => offer.city.name === currentCity.name);
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -54,7 +59,7 @@ function MainPage({offersCount, offers}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offersInCurrentCity.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -70,10 +75,10 @@ function MainPage({offersCount, offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList offers={offers} />
+              <CardList offers={offersInCurrentCity} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map className="cities__map" city={currentCity} offers={offersInCurrentCity} />
             </div>
           </div>
         </div>
