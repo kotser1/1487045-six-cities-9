@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 
 import useMap from '../../hooks/useMap';
 import { City, Offer } from '../../types/offer';
-import { URL_MARKER_DEFAULT } from '../../const';
+import { DEFAULT_MARKER_URL } from '../../const';
 
 type MapProps = {
   className: string;
@@ -12,11 +12,14 @@ type MapProps = {
   offers: Offer[];
 };
 
-const defaultIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
+function createIcon(iconUrl: string) {
+  const icon = new Icon({
+    iconUrl: iconUrl,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+  return icon;
+}
 
 function Map({className, city, offers}: MapProps):JSX.Element {
   const mapRef = useRef(null);
@@ -31,7 +34,7 @@ function Map({className, city, offers}: MapProps):JSX.Element {
         });
 
         marker
-          .setIcon(defaultIcon)
+          .setIcon(createIcon(DEFAULT_MARKER_URL))
           .addTo(map);
       });
     }
