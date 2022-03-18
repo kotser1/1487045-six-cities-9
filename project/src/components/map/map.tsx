@@ -1,10 +1,10 @@
 import { useRef, useEffect } from 'react';
-import {Icon, Marker} from 'leaflet';
+import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import useMap from '../../hooks/useMap';
 import { City, Offer } from '../../types/offer';
-import {URL_MARKER_DEFAULT} from '../../const';
+import { URL_MARKER_DEFAULT } from '../../const';
 
 type MapProps = {
   className: string;
@@ -41,8 +41,7 @@ function Map({className, city, offers}: MapProps):JSX.Element {
     <section
       className={`${className} map`}
       ref={mapRef}
-    >
-    </section>
+    />
   );
 }
 
