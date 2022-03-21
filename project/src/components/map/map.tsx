@@ -4,12 +4,13 @@ import 'leaflet/dist/leaflet.css';
 
 import useMap from '../../hooks/useMap';
 import { City, Offer } from '../../types/offer';
-import { DEFAULT_MARKER_URL } from '../../const';
+import { DEFAULT_MARKER_URL, CURRENT_MARKER_URL } from '../../const';
 
 type MapProps = {
   className: string;
   city: City;
   offers: Offer[];
+  selectedOfferId: number | null;
 };
 
 function createIcon(iconUrl: string) {
@@ -21,7 +22,11 @@ function createIcon(iconUrl: string) {
   return icon;
 }
 
-function Map({className, city, offers}: MapProps):JSX.Element {
+const defaultIcon = createIcon(DEFAULT_MARKER_URL);
+const currentIcon = createIcon(CURRENT_MARKER_URL);
+
+
+function Map({className, city, offers, selectedOfferId}: MapProps):JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -34,11 +39,15 @@ function Map({className, city, offers}: MapProps):JSX.Element {
         });
 
         marker
-          .setIcon(createIcon(DEFAULT_MARKER_URL))
+          .setIcon(
+            selectedOfferId !== null && offer.id === selectedOfferId
+              ? currentIcon
+              : defaultIcon,
+          )
           .addTo(map);
       });
     }
-  }, [map, offers]);
+  }, [map, offers, selectedOfferId]);
 
   return (
     <section

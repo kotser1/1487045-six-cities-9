@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 import { RATES } from '../../const';
 
 function CommentForm(): JSX.Element {
@@ -18,7 +18,7 @@ function CommentForm(): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATES.map((rate) => (
-          <>
+          <Fragment key={rate.value}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
@@ -36,7 +36,7 @@ function CommentForm(): JSX.Element {
                 <use xlinkHref="#icon-star"></use>
               </svg>
             </label>
-          </>
+          </Fragment>
         ))}
 
       </div>

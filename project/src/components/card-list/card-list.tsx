@@ -1,26 +1,22 @@
-import { useState } from 'react';
-
 import Card from '../card/card';
 import { Offer } from '../../types/offer';
+import { CARD_CLASSNAMES } from '../../const';
 
 type CardListProps = {
   offers: Offer[];
+  classType: string;
+  onCardHover?: (id: number | null) => void;
 };
 
-function CardList({offers}: CardListProps): JSX.Element {
-  const [, setActiveCard] = useState<number | null>(null);
-
-  const handleCardHover = (id: number | null) => {
-    setActiveCard(id);
-  };
-
+function CardList({offers, classType, onCardHover}: CardListProps): JSX.Element {
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={CARD_CLASSNAMES[classType as keyof typeof CARD_CLASSNAMES].list}>
       {offers.map((item) => (
         <Card
           key={item.id}
           offer={item}
-          onActiveCardChange={handleCardHover}
+          onActiveCardChange={onCardHover}
+          classType={classType}
         />))}
     </div>
   );
