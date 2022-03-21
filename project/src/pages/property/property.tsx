@@ -139,7 +139,12 @@ function Property({offers, reviews}: PropertyProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className="property__map" city={city} offers={offersInCurrentCity} selectedOfferId={currentId}/>
+          <Map
+            className="property__map"
+            city={city}
+            offers={offersInCurrentCity}
+            selectedOfferId={currentId}
+          />
         </section>
         <div className="container">
           <NearPlaces offers={nearOffers} />
