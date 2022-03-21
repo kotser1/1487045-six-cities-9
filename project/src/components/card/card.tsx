@@ -13,7 +13,7 @@ type CardProps = {
 
 function Card({offer, classType, onActiveCardChange}: CardProps): JSX.Element {
   const {isPremium, previewImage, title, price, rating, type, id} = offer;
-  const classes = CARD_CLASSNAMES[classType as keyof typeof CARD_CLASSNAMES];
+  const classes = CARD_CLASSNAMES[classType];
 
   return (
     <article

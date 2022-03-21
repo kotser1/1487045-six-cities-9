@@ -1,3 +1,5 @@
+import { CardClasses } from './types/card-class';
+
 export enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -100,15 +102,15 @@ export const DEFAULT_MARKER_URL = 'https://assets.htmlacademy.ru/content/intensi
 
 export const CURRENT_MARKER_URL = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
-export const CARD_CLASSNAMES = {
+export const CARD_CLASSNAMES: CardClasses = {
   main: {
-    'list': 'cities__places-list places__list tabs__content',
-    'article': 'cities__place-card place-card',
-    'wrapper': 'cities__image-wrapper place-card__image-wrapper',
+    list: 'cities__places-list places__list tabs__content',
+    article: 'cities__place-card place-card',
+    wrapper: 'cities__image-wrapper place-card__image-wrapper',
   },
   nearPlaces: {
-    'list': 'near-places__list places__list',
-    'article': 'near-places__card place-card',
-    'wrapper': 'near-places__image-wrapper place-card__image-wrapper',
+    list: 'near-places__list places__list',
+    article: 'near-places__card place-card',
+    wrapper: 'near-places__image-wrapper place-card__image-wrapper',
   },
 };

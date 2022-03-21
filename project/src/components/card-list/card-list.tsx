@@ -10,7 +10,7 @@ type CardListProps = {
 
 function CardList({offers, classType, onCardHover}: CardListProps): JSX.Element {
   return (
-    <div className={CARD_CLASSNAMES[classType as keyof typeof CARD_CLASSNAMES].list}>
+    <div className={CARD_CLASSNAMES[classType].list}>
       {offers.map((item) => (
         <Card
           key={item.id}
