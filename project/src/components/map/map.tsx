@@ -16,8 +16,8 @@ type MapProps = {
 function createIcon(iconUrl: string) {
   const icon = new Icon({
     iconUrl: iconUrl,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [28, 40],
+    iconAnchor: [14, 40],
   });
   return icon;
 }
