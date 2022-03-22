@@ -2,12 +2,14 @@ import { useParams } from 'react-router-dom';
 
 import Header from '../../components/header/header';
 import PremiumSticker from '../../components/premium-sticker/premium-sticker';
-import Comment from '../../components/comment/comment';
+import CommentsList from '../../components/comments-list/comments-list';
 import CommentForm from '../../components/comment-form/comment-form';
+import Map from '../../components/map/map';
 import NearPlaces from '../../components/near-places/near-places';
 
 import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
+import { getOffersInCurrentCity } from '../../utils';
 
 
 type PropertyProps = {
@@ -33,7 +35,11 @@ function Property({offers, reviews}: PropertyProps): JSX.Element {
     goods,
     host,
     description,
+    city,
   } = currentOffer;
+
+  const offersInCurrentCity = getOffersInCurrentCity(offers, city.name);
+  const nearOffers = offersInCurrentCity.filter((item) => item.id !== currentId);
 
   return (
     <div className="page">
@@ -128,17 +134,20 @@ function Property({offers, reviews}: PropertyProps): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ul className="reviews__list">
-                  {reviews.map((review) => <Comment key={review.id} review={review} />)}
-                </ul>
+                <CommentsList reviews={reviews}/>
                 <CommentForm />
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            className="property__map"
+            city={city}
+            offers={offersInCurrentCity}
+            selectedOfferId={currentId}
+          />
         </section>
         <div className="container">
-          <NearPlaces />
+          <NearPlaces offers={nearOffers} />
         </div>
       </main>
     </div>

@@ -1,17 +1,26 @@
+import { useState } from 'react';
+
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
 
 import { Offer } from '../../types/offer';
 import { CITIES } from '../../const';
+import { getOffersInCurrentCity } from '../../utils';
 
 type MainPageProps = {
   offers: Offer[];
 }
 
 function MainPage({offers}: MainPageProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
+  const handleCardHover = (id: number | null) => {
+    setActiveCard(id);
+  };
+
   const currentCity = CITIES.Amsterdam;
-  const offersInCurrentCity = offers.filter((offer) => offer.city.name === currentCity.name);
+  const offersInCurrentCity = getOffersInCurrentCity(offers, currentCity.name);
 
   return (
     <div className="page page--gray page--main">
@@ -75,10 +84,10 @@ function MainPage({offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList offers={offersInCurrentCity} />
+              <CardList offers={offersInCurrentCity} onCardHover={handleCardHover} classType={'main'} />
             </section>
             <div className="cities__right-section">
-              <Map className="cities__map" city={currentCity} offers={offersInCurrentCity} />
+              <Map className="cities__map" city={currentCity} offers={offersInCurrentCity} selectedOfferId={activeCard} />
             </div>
           </div>
         </div>

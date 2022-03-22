@@ -3,23 +3,26 @@ import { Link } from 'react-router-dom';
 import PremiumSticker from '../premium-sticker/premium-sticker';
 
 import { Offer } from '../../types/offer';
-import { AppRoute } from '../../const';
+import { AppRoute, CARD_CLASSNAMES } from '../../const';
 
 type CardProps = {
   offer: Offer;
-  onActiveCardChange: (id:number | null) => void;
+  classType: string;
+  onActiveCardChange?: (id:number | null) => void;
 };
 
-function Card({offer, onActiveCardChange}: CardProps): JSX.Element {
+function Card({offer, classType, onActiveCardChange}: CardProps): JSX.Element {
   const {isPremium, previewImage, title, price, rating, type, id} = offer;
+  const classes = CARD_CLASSNAMES[classType];
+
   return (
     <article
-      className="cities__place-card place-card"
-      onMouseEnter={() => onActiveCardChange(id)}
-      onMouseLeave={() => onActiveCardChange(null)}
+      className={classes.article}
+      onMouseEnter={() => onActiveCardChange !== undefined ? onActiveCardChange(id) : null}
+      onMouseLeave={() => onActiveCardChange !== undefined ? onActiveCardChange(null): null}
     >
       {isPremium && (<PremiumSticker className='place-card__mark'/>)}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={classes.wrapper}>
         <Link to={`${AppRoute.Property}/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
         </Link>
