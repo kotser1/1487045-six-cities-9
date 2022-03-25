@@ -11,7 +11,6 @@ import Map from '../../components/map/map';
 import { City } from '../../types/offer';
 import { getOffersInCurrentCity } from '../../utils';
 
-
 function MainPage(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);

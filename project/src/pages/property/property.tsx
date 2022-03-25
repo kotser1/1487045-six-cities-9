@@ -12,11 +12,9 @@ import { useAppSelector } from '../../hooks/';
 import { Review } from '../../types/review';
 import { getOffersInCurrentCity } from '../../utils';
 
-
 type PropertyProps = {
   reviews: Review[];
 };
-
 
 function Property({reviews}: PropertyProps): JSX.Element {
   const offers = useAppSelector((state) => state.offers);

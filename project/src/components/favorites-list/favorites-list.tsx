@@ -1,7 +1,6 @@
 import FavoriteLocation from '../favorite-location/favorite-location';
 import { useAppSelector } from '../../hooks/';
 
-
 function FavoritesList(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
