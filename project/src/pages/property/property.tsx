@@ -8,18 +8,18 @@ import CommentForm from '../../components/comment-form/comment-form';
 import Map from '../../components/map/map';
 import NearPlaces from '../../components/near-places/near-places';
 
-import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks/';
 import { Review } from '../../types/review';
 import { getOffersInCurrentCity } from '../../utils';
 
 
 type PropertyProps = {
-  offers: Offer[];
   reviews: Review[];
 };
 
 
-function Property({offers, reviews}: PropertyProps): JSX.Element {
+function Property({reviews}: PropertyProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const params = useParams();
   const currentId = Number(params.id);
   const currentOffer = offers.filter((item) => item.id === currentId)[0];

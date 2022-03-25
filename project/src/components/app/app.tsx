@@ -8,15 +8,13 @@ import Page404 from '../../pages/page404/page404';
 import PrivateRoute from '../private-route/private-route';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 
 type AppProps = {
-  offers: Offer[];
   reviews: Review[];
 }
 
-function App({offers, reviews}: AppProps): JSX.Element {
+function App({reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -34,7 +32,7 @@ function App({offers, reviews}: AppProps): JSX.Element {
           path={AppRoute.Favorites}
           element={(
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <Favorites offers={offers} />
+              <Favorites />
             </PrivateRoute>
           )}
         />
@@ -43,7 +41,6 @@ function App({offers, reviews}: AppProps): JSX.Element {
             path={AppRoute.PropertyId}
             element={
               <Property
-                offers={offers}
                 reviews={reviews}
               />
             }
