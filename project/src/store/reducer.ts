@@ -1,15 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, setOffers } from './action';
 
-import { CITIES } from '../const';
+import { DEFAULT_CITY } from '../const';
 import { mockOffers } from '../mocks/offers';
-import { getOffersInCurrentCity } from '../utils';
-
-const initialOffers = getOffersInCurrentCity(mockOffers, CITIES.Paris.name);
 
 const initialState = {
-  city: CITIES.Paris,
-  offers: initialOffers,
+  city: DEFAULT_CITY,
+  offers: mockOffers,
 };
 
 export const reducer = createReducer(initialState, (builder) => {

@@ -42,8 +42,8 @@ export const CITIES = {
   Paris: {
     'name': 'Paris',
     'location': {
-      'latitude': 52.37454,
-      'longitude': 4.897976,
+      'latitude': 48.85661,
+      'longitude': 2.351499,
       'zoom': 12,
     },
   },
@@ -93,6 +93,8 @@ export const CITIES = {
     },
   },
 };
+
+export const DEFAULT_CITY = CITIES.Paris;
 
 export const MAP_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
