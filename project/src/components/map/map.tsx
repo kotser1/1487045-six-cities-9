@@ -16,8 +16,8 @@ type MapProps = {
 function createIcon(iconUrl: string) {
   const icon = new Icon({
     iconUrl: iconUrl,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [28, 40],
+    iconAnchor: [14, 40],
   });
   return icon;
 }
@@ -31,6 +31,11 @@ function Map({className, city, offers, selectedOfferId}: MapProps): JSX.Element 
 
   useEffect(() => {
     if (map) {
+      map.setView({
+        lat: city.location.latitude,
+        lng: city.location.longitude,
+      });
+
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -46,7 +51,7 @@ function Map({className, city, offers, selectedOfferId}: MapProps): JSX.Element 
           .addTo(map);
       });
     }
-  }, [map, offers, selectedOfferId]);
+  }, [map, city, offers, selectedOfferId]);
 
   return (
     <section

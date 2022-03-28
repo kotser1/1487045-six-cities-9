@@ -42,8 +42,8 @@ export const CITIES = {
   Paris: {
     'name': 'Paris',
     'location': {
-      'latitude': 52.37454,
-      'longitude': 4.897976,
+      'latitude': 48.85661,
+      'longitude': 2.351499,
       'zoom': 12,
     },
   },
@@ -94,13 +94,15 @@ export const CITIES = {
   },
 };
 
+export const DEFAULT_CITY = CITIES.Paris;
+
 export const MAP_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
 export const LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-export const DEFAULT_MARKER_URL = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const DEFAULT_MARKER_URL = 'img/pin.svg';
 
-export const CURRENT_MARKER_URL = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export const CURRENT_MARKER_URL = 'img/pin-active.svg';
 
 export const CARD_CLASSNAMES: CardClasses = {
   main: {
@@ -113,4 +115,14 @@ export const CARD_CLASSNAMES: CardClasses = {
     article: 'near-places__card place-card',
     wrapper: 'near-places__image-wrapper place-card__image-wrapper',
   },
+};
+
+export const DEFAULT_BOOKMARK_SIZES = {
+  width: 18,
+  height: 19,
+};
+
+export const PROPERTY_BOOKMARK_SIZES = {
+  width: 31,
+  height: 33,
 };

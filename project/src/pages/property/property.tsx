@@ -2,23 +2,22 @@ import { useParams } from 'react-router-dom';
 
 import Header from '../../components/header/header';
 import PremiumSticker from '../../components/premium-sticker/premium-sticker';
+import Bookmark from '../../components/bookmark/bookmark';
 import CommentsList from '../../components/comments-list/comments-list';
 import CommentForm from '../../components/comment-form/comment-form';
 import Map from '../../components/map/map';
 import NearPlaces from '../../components/near-places/near-places';
 
-import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks/';
 import { Review } from '../../types/review';
 import { getOffersInCurrentCity } from '../../utils';
 
-
 type PropertyProps = {
-  offers: Offer[];
   reviews: Review[];
 };
 
-
-function Property({offers, reviews}: PropertyProps): JSX.Element {
+function Property({reviews}: PropertyProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const params = useParams();
   const currentId = Number(params.id);
   const currentOffer = offers.filter((item) => item.id === currentId)[0];
@@ -27,6 +26,7 @@ function Property({offers, reviews}: PropertyProps): JSX.Element {
     title,
     images,
     isPremium,
+    isFavorite,
     rating,
     type,
     bedrooms,
@@ -67,12 +67,7 @@ function Property({offers, reviews}: PropertyProps): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <Bookmark btnInfo={'property'} isFavorite={isFavorite} />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
