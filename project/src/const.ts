@@ -126,3 +126,12 @@ export const PROPERTY_BOOKMARK_SIZES = {
   width: 31,
   height: 33,
 };
+
+export enum SortTypes {
+  Popular = 'Popular',
+  LowPrice = 'Price: low to high',
+  HighPrice = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
+
+export const DEFAULT_SORT_TYPE: string = SortTypes.Popular;

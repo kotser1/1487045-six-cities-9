@@ -1,19 +1,22 @@
 import { useState } from 'react';
+import cn from 'classnames';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
 import { changeCity } from '../../store/action';
 
 import Header from '../../components/header/header';
+import SortingMenu from '../../components/sorting-menu/sorting-menu';
 import EmptyMainPage from '../../components/empty-main-page/empty-main-page';
 import CitiesList from '../../components/cities-list/cities-list';
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
 
 import { City } from '../../types/offer';
-import { getOffersInCurrentCity } from '../../utils';
+import { getOffersInCurrentCity, getSortedOffers } from '../../utils';
 
 function MainPage(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);
+  const currentSortType = useAppSelector((state) => state.sortType);
 
   const dispatch = useAppDispatch();
 
@@ -28,26 +31,24 @@ function MainPage(): JSX.Element {
   };
 
   const offersInCurrentCity = getOffersInCurrentCity(offers, currentCity.name);
+  const sortedOffers = getSortedOffers(currentSortType, offersInCurrentCity);
   const isEmpty = offersInCurrentCity.length === 0;
 
   return (
     <div className="page page--gray page--main">
       <Header />
-
-      <main className={`
-        page__main
-        page__main--index
-        ${isEmpty ? 'page__main--index-empty' : ''}`}
+      <main className={cn('page__main', 'page__main--index', {
+        'page__main--index-empty': isEmpty,
+      })}
       >
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <CitiesList currentCity={currentCity} onCityClick={handleCityClick} />
         </div>
         <div className="cities">
-          <div className={`
-            cities__places-container
-            container
-            ${isEmpty ? 'cities__places-container--empty' : ''}`}
+          <div className={cn('cities__places-container', 'container', {
+            'cities__places-container--empty': isEmpty,
+          })}
           >
             {isEmpty
               ? <EmptyMainPage cityName={currentCity.name}/>
@@ -55,22 +56,8 @@ function MainPage(): JSX.Element {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{offersInCurrentCity.length} places to stay in {currentCity.name}</b>
-                  <form className="places__sorting" action="#" method="get">
-                    <span className="places__sorting-caption">Sort by</span>
-                    <span className="places__sorting-type" tabIndex={0}>
-                      Popular
-                      <svg className="places__sorting-arrow" width="7" height="4">
-                        <use xlinkHref="#icon-arrow-select"></use>
-                      </svg>
-                    </span>
-                    <ul className="places__options places__options--custom places__options--opened">
-                      <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                      <li className="places__option" tabIndex={0}>Price: low to high</li>
-                      <li className="places__option" tabIndex={0}>Price: high to low</li>
-                      <li className="places__option" tabIndex={0}>Top rated first</li>
-                    </ul>
-                  </form>
-                  <CardList offers={offersInCurrentCity} onCardHover={handleCardHover} classType={'main'} />
+                  <SortingMenu currentSortType={currentSortType} />
+                  <CardList offers={sortedOffers} onCardHover={handleCardHover} classType={'main'} />
                 </section>
               )}
             <div className="cities__right-section">

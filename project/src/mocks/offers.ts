@@ -145,7 +145,7 @@ const mockOffers: Offer[] = [
     'title': 'House in countryside',
     'isFavorite': false,
     'isPremium': false,
-    'rating': 4,
+    'rating': 5,
     'type': 'room',
     'bedrooms': 1,
     'maxAdults': 2,
