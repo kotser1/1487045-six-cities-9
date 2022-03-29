@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { CITIES } from '../../const';
 import { City } from '../../types/offer';
 
@@ -15,10 +16,9 @@ function CitiesList({currentCity, onCityClick}: CitiesListProps): JSX.Element {
         {locations.map((item) => (
           <li key={item.name} className="locations__item">
             <a
-              className={`locations__item-link
-                tabs__item
-                ${item.name === currentCity.name && 'tabs__item--active'}
-              `}
+              className={cn('locations__item-link', 'tabs__item', {
+                'tabs__item--active': item.name === currentCity.name,
+              })}
               href="/#"
               onClick={() => onCityClick(item)}
             >
