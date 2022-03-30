@@ -126,3 +126,26 @@ export const PROPERTY_BOOKMARK_SIZES = {
   width: 31,
   height: 33,
 };
+
+export enum SortTypes {
+  Popular = 'Popular',
+  LowPrice = 'Price: low to high',
+  HighPrice = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
+
+export const DEFAULT_SORT_TYPE: string = SortTypes.Popular;
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Favorites = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
+}
