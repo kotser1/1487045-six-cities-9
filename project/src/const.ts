@@ -135,3 +135,17 @@ export enum SortTypes {
 }
 
 export const DEFAULT_SORT_TYPE: string = SortTypes.Popular;
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Favorites = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
+}

@@ -1,5 +1,6 @@
 import { Offer } from './types/offer';
 import { SortTypes } from './const';
+import { AuthorizationStatus } from './const';
 
 export function getOffersInCurrentCity(offers: Offer[], currentCityName: string) {
   return offers.filter((offer) => offer.city.name === currentCityName);
@@ -19,3 +20,7 @@ export const getSortedOffers = (sortType: string, offers: Offer[]) => {
       return offers;
   }
 };
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Unknown;
+
+export const isAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Auth;
