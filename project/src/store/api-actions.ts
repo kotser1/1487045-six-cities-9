@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { api, store } from '../store';
-import { loadOffers, requireAuthorization } from './action';
+import { loadOffers, requireAuthorization, redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { errorHandle } from '../services/error-handle';
 import { Offer } from '../types/offer';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { APIRoute, AuthorizationStatus } from '../const';
+import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 
 export const fetchOfferAction = createAsyncThunk(
   'data/fetchOffers',
@@ -41,6 +41,7 @@ export const loginAction = createAsyncThunk(
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
