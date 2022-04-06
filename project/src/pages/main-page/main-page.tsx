@@ -63,7 +63,7 @@ function MainPage(): JSX.Element {
             <div className="cities__right-section">
               {isEmpty
                 ? ''
-                : <Map className="cities__map" city={currentCity} offers={offersInCurrentCity} selectedOfferId={activeCard} />}
+                : <Map className="cities__map" city={currentCity} selectedOfferId={activeCard} />}
             </div>
           </div>
         </div>

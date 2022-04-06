@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Header from '../../components/header/header';
@@ -7,20 +8,34 @@ import CommentsList from '../../components/comments-list/comments-list';
 import CommentForm from '../../components/comment-form/comment-form';
 import Map from '../../components/map/map';
 import NearPlaces from '../../components/near-places/near-places';
+import Spinner from '../../components/spinner/spinner';
 
-import { useAppSelector } from '../../hooks/';
-import { Review } from '../../types/review';
-import { getOffersInCurrentCity } from '../../utils';
+import { fetchOfferAction, fetchNearOffersAction, fetchReviewsAction } from '../../store/api-actions';
+import { useAppSelector, useAppDispatch } from '../../hooks/';
 
-type PropertyProps = {
-  reviews: Review[];
-};
-
-function Property({reviews}: PropertyProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+function Property(): JSX.Element {
   const params = useParams();
   const currentId = Number(params.id);
-  const currentOffer = offers.filter((item) => item.id === currentId)[0];
+
+  const currentOffer = useAppSelector((state) => state.offer);
+  const isOfferLoaded = useAppSelector((state) => state.isOfferLoaded);
+  const nearOffers = useAppSelector((state) => state.nearOffers);
+  const reviews = useAppSelector((state) => state.reviews);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOfferAction(currentId));
+    dispatch(fetchNearOffersAction(currentId));
+    dispatch(fetchReviewsAction(currentId));
+  },
+  [currentId, dispatch]);
+
+  if (currentOffer === null || !isOfferLoaded) {
+    return (
+      <Spinner />
+    );
+  }
 
   const {
     title,
@@ -37,9 +52,6 @@ function Property({reviews}: PropertyProps): JSX.Element {
     description,
     city,
   } = currentOffer;
-
-  const offersInCurrentCity = getOffersInCurrentCity(offers, city.name);
-  const nearOffers = offersInCurrentCity.filter((item) => item.id !== currentId);
 
   return (
     <div className="page">
@@ -137,7 +149,6 @@ function Property({reviews}: PropertyProps): JSX.Element {
           <Map
             className="property__map"
             city={city}
-            offers={offersInCurrentCity}
             selectedOfferId={currentId}
           />
         </section>

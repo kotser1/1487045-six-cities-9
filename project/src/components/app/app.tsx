@@ -11,15 +11,10 @@ import HistoryRouter from '../history-route/history-route';
 
 import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
-import { Review } from '../../types/review';
 import { isCheckedAuth } from '../../utils';
 import browserHistory from '../../browser-history';
 
-type AppProps = {
-  reviews: Review[];
-}
-
-function App({reviews}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
@@ -54,9 +49,7 @@ function App({reviews}: AppProps): JSX.Element {
           <Route
             path={AppRoute.PropertyId}
             element={
-              <Property
-                reviews={reviews}
-              />
+              <Property />
             }
           />
         </Route>
