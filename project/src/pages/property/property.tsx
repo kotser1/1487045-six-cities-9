@@ -12,6 +12,7 @@ import Spinner from '../../components/spinner/spinner';
 
 import { fetchOfferAction, fetchNearOffersAction, fetchReviewsAction } from '../../store/api-actions';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
+import { isAuth } from '../../utils';
 
 function Property(): JSX.Element {
   const params = useParams();
@@ -21,6 +22,7 @@ function Property(): JSX.Element {
   const isOfferLoaded = useAppSelector((state) => state.isOfferLoaded);
   const nearOffers = useAppSelector((state) => state.nearOffers);
   const reviews = useAppSelector((state) => state.reviews);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const dispatch = useAppDispatch();
 
@@ -142,7 +144,7 @@ function Property(): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <CommentsList reviews={reviews}/>
-                <CommentForm />
+                {isAuth(authorizationStatus) && <CommentForm />}
               </section>
             </div>
           </div>
