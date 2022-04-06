@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { api, store } from '../store';
-import { loadOffers, requireAuthorization, redirectToRoute } from './action';
+import { loadOffers, requireAuthorization, redirectToRoute, setUserEmail } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { errorHandle } from '../services/error-handle';
 import { Offer } from '../types/offer';
@@ -42,6 +42,7 @@ export const loginAction = createAsyncThunk(
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(redirectToRoute(AppRoute.Root));
+      store.dispatch(setUserEmail(email));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));

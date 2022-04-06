@@ -7,6 +7,7 @@ import { isAuth } from '../../utils';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userEmail = useAppSelector((state) => state.userEmail);
   const dispatch = useAppDispatch();
 
   return (
@@ -25,7 +26,7 @@ function Header(): JSX.Element {
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   {isAuth(authorizationStatus)
-                    ? <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    ? <span className="header__user-name user__name">{userEmail}</span>
                     : <span className="header__login">Sign in</span>}
                 </Link>
               </li>

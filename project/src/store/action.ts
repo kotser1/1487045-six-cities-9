@@ -11,3 +11,5 @@ export const changeSortType = createAction<string>('changeSortType');
 export const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
 
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
+
+export const setUserEmail = createAction<string>('setUserEmail');
