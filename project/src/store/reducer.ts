@@ -41,11 +41,6 @@ const initialState: InitialState = {
   isOfferLoaded: false,
   nearOffers: [],
   reviews: [],
-  // newReview: {
-  //   id: 0,
-  //   rating: 0,
-  //   comment: '',
-  // },
 };
 
 export const reducer = createReducer(initialState, (builder) => {

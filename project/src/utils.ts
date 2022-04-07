@@ -1,6 +1,6 @@
 import { Offer } from './types/offer';
 import { SortTypes } from './const';
-import { AuthorizationStatus } from './const';
+import { AuthorizationStatus, RATING_WIDTH_PERCENT } from './const';
 
 export function getOffersInCurrentCity(offers: Offer[], currentCityName: string) {
   return offers.filter((offer) => offer.city.name === currentCityName);
@@ -29,5 +29,5 @@ export const getRatingValue = (rating: number | null): number => {
   if (rating === null) {
     return 0;
   }
-  return rating * 20;
+  return rating * RATING_WIDTH_PERCENT;
 };
