@@ -14,6 +14,8 @@ export const loadNearOffers = createAction<Offer[]>('loadNearOffers');
 
 export const loadReviews = createAction<Review[]>('loadReviews');
 
+export const sendReview = createAction<Review[]>('sendReview');
+
 export const changeSortType = createAction<string>('changeSortType');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');

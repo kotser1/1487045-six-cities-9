@@ -8,7 +8,8 @@ import {
   loadReviews,
   changeSortType,
   requireAuthorization,
-  setUserEmail
+  setUserEmail,
+  sendReview
 } from './action';
 
 import { DEFAULT_CITY, DEFAULT_SORT_TYPE, AuthorizationStatus } from '../const';
@@ -26,6 +27,7 @@ type InitialState = {
   isOfferLoaded: boolean;
   nearOffers: Offer[];
   reviews: Review[];
+  // newReview: NewReview;
 }
 
 const initialState: InitialState = {
@@ -39,6 +41,11 @@ const initialState: InitialState = {
   isOfferLoaded: false,
   nearOffers: [],
   reviews: [],
+  // newReview: {
+  //   id: 0,
+  //   rating: 0,
+  //   comment: '',
+  // },
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -58,6 +65,9 @@ export const reducer = createReducer(initialState, (builder) => {
       state.nearOffers = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(sendReview, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(changeSortType, (state, action) => {

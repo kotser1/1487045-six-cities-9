@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { api, store } from '../store';
-import { loadOffers, loadOffer, loadNearOffers, loadReviews, requireAuthorization, redirectToRoute, setUserEmail } from './action';
+import { loadOffers, loadOffer, loadNearOffers, loadReviews, requireAuthorization, redirectToRoute, setUserEmail, sendReview } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { errorHandle } from '../services/error-handle';
 import { Offer } from '../types/offer';
-import { Review } from '../types/review';
+import { Review, NewReview } from '../types/review';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
@@ -95,6 +95,18 @@ export const logoutAction = createAsyncThunk(
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
       store.dispatch(setUserEmail(''));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const sendReviewAction = createAsyncThunk(
+  'data/sendReview',
+  async ({id, rating, comment}: NewReview) => {
+    try {
+      const {data} = await api.post(`${APIRoute.Comments}/${id}`, {comment, rating});
+      store.dispatch(sendReview(data));
     } catch (error) {
       errorHandle(error);
     }

@@ -1,20 +1,43 @@
-import { ChangeEvent, Fragment, useState } from 'react';
-import { RATES } from '../../const';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { useAppDispatch } from '../../hooks';
+import { sendReviewAction } from '../../store/api-actions';
+import { RATES, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH } from '../../const';
 
 function CommentForm(): JSX.Element {
-  const [, setRatingData] = useState('');
+  const [ratingData, setRatingData] = useState<number | null>(null);
   const [commentData, setCommentData] = useState('');
 
+  const params = useParams();
+  const currentId = Number(params.id);
+
+  const dispatch = useAppDispatch();
+
   const handleRatingChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRatingData(e.target.value);
+    setRatingData(Number(e.target.value));
   };
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setCommentData(e.target.value);
   };
 
+  const isDisabled = () => (ratingData === null || commentData.length <= MIN_COMMENT_LENGTH || commentData.length > MAX_COMMENT_LENGTH);
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(sendReviewAction({
+      rating: ratingData,
+      comment: commentData,
+      id: currentId,
+    }));
+    setRatingData(null);
+    setCommentData('');
+  };
+
+
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={(e) => e.preventDefault()}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATES.map((rate) => (
@@ -53,7 +76,7 @@ function CommentForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isDisabled()} >Submit</button>
       </div>
     </form>
   );

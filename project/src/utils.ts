@@ -24,3 +24,10 @@ export const getSortedOffers = (sortType: string, offers: Offer[]) => {
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Unknown;
 
 export const isAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Auth;
+
+export const getRatingValue = (rating: number | null): number => {
+  if (rating === null) {
+    return 0;
+  }
+  return rating * 20;
+};
