@@ -1,20 +1,42 @@
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
 
 import Header from '../../components/header/header';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 
+import { useAppSelector } from '../../hooks/';
 import { AppRoute } from '../../const';
 
 function Favorites(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const isEmpty = favoriteOffers.length === 0;
+
   return (
-    <div className="page">
+    <div className={cn('page', {'page--favorites-empty' : isEmpty})}>
       <Header />
 
-      <main className="page__main page__main--favorites">
+      <main className={cn(
+        'page__main',
+        'page__main--favorites',
+        {'page__main--favorites-empty': isEmpty})}
+      >
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList />
+          <section className={cn('favorites', {'favorites--empty': isEmpty})}>
+            {isEmpty
+              ? (
+                <>
+                  <h1 className="visually-hidden">Favorites (empty)</h1>
+                  <div className="favorites__status-wrapper">
+                    <b className="favorites__status">Nothing yet saved.</b>
+                    <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+                  </div>
+                </>)
+              : (
+                <>
+                  <h1 className="favorites__title">Saved listing</h1>
+                  <FavoritesList favoriteOffers={favoriteOffers}/>
+                </>)}
           </section>
         </div>
       </main>

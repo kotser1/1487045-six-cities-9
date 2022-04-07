@@ -60,6 +60,8 @@ function Login(): JSX.Element {
                   name="email"
                   placeholder="Email"
                   required
+                  pattern='^[a-zA-z0-9\.]+@[a-zA-Z0-9-]+\.[a-zA-Z]+'
+                  title='Invalid email!'
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -71,6 +73,8 @@ function Login(): JSX.Element {
                   name="password"
                   placeholder="Password"
                   required
+                  pattern='^[^\s]+$'
+                  title='Password must not contain spaces!'
                 />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>

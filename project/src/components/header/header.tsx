@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 import { AppRoute } from '../../const';
 import { isAuth } from '../../utils';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userEmail = useAppSelector((state) => state.userEmail);
+  const dispatch = useAppDispatch();
 
   return (
     <header className="header">
@@ -23,13 +26,20 @@ function Header(): JSX.Element {
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   {isAuth(authorizationStatus)
-                    ? <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    ? <span className="header__user-name user__name">{userEmail}</span>
                     : <span className="header__login">Sign in</span>}
                 </Link>
               </li>
               {isAuth(authorizationStatus) && (
                 <li className="header__nav-item">
-                  <Link className="header__nav-link" to="/#">
+                  <Link
+                    className="header__nav-link"
+                    to="/#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(logoutAction());
+                    }}
+                  >
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>

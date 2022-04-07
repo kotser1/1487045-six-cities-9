@@ -2,14 +2,15 @@ import { useRef, useEffect } from 'react';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+import { useAppSelector } from '../../hooks';
 import useMap from '../../hooks/useMap';
-import { City, Offer } from '../../types/offer';
+import { City } from '../../types/offer';
 import { DEFAULT_MARKER_URL, CURRENT_MARKER_URL } from '../../const';
+import { getOffersInCurrentCity } from '../../utils';
 
 type MapProps = {
   className: string;
   city: City;
-  offers: Offer[];
   selectedOfferId: number | null;
 };
 
@@ -25,7 +26,10 @@ function createIcon(iconUrl: string) {
 const defaultIcon = createIcon(DEFAULT_MARKER_URL);
 const currentIcon = createIcon(CURRENT_MARKER_URL);
 
-function Map({className, city, offers, selectedOfferId}: MapProps): JSX.Element {
+function Map({className, city, selectedOfferId}: MapProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const offersInCurrentCity = getOffersInCurrentCity(offers, city.name);
+
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -36,7 +40,7 @@ function Map({className, city, offers, selectedOfferId}: MapProps): JSX.Element 
         lng: city.location.longitude,
       });
 
-      offers.forEach((offer) => {
+      offersInCurrentCity.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
@@ -51,7 +55,7 @@ function Map({className, city, offers, selectedOfferId}: MapProps): JSX.Element 
           .addTo(map);
       });
     }
-  }, [map, city, offers, selectedOfferId]);
+  }, [map, city, offersInCurrentCity, selectedOfferId]);
 
   return (
     <section
