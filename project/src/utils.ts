@@ -25,9 +25,4 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
 
 export const isAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Auth;
 
-export const getRatingValue = (rating: number | null): number => {
-  if (rating === null) {
-    return 0;
-  }
-  return rating * RATING_WIDTH_PERCENT;
-};
+export const getRatingValue = (rating: number | null): number => (rating === null) ? 0 : rating * RATING_WIDTH_PERCENT;
