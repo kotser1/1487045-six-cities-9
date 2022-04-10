@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import Card from '../card/card';
 import { Offer } from '../../types/offer';
 import { CARD_CLASSNAMES } from '../../const';
@@ -22,4 +24,4 @@ function CardList({offers, classType, onCardHover}: CardListProps): JSX.Element 
   );
 }
 
-export default CardList;
+export default memo(CardList);

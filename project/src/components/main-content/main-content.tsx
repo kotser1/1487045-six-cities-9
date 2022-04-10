@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import SortingMenu from '../../components/sorting-menu/sorting-menu';
 import CardList from '../../components/card-list/card-list';
@@ -20,9 +20,9 @@ function MainContent({currentCity, offersInCurrentCity}: MainContentProps): JSX.
 
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  const handleCardHover = (id: number | null) => {
+  const handleCardHover = useCallback((id: number | null) => {
     setActiveCard(id);
-  };
+  }, []);
 
   return (
     <div className="cities">
