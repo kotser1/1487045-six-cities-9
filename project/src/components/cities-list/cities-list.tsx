@@ -1,14 +1,22 @@
 import cn from 'classnames';
-import { CITIES } from '../../const';
+
+import { useAppDispatch } from '../../hooks/';
+import { changeCity } from '../../store/action';
 import { City } from '../../types/offer';
+import { CITIES } from '../../const';
 
 type CitiesListProps = {
   currentCity: City;
-  onCityClick: (city: City) => void;
 };
 
-function CitiesList({currentCity, onCityClick}: CitiesListProps): JSX.Element {
+function CitiesList({currentCity}: CitiesListProps): JSX.Element {
   const locations = Object.values(CITIES);
+
+  const dispatch = useAppDispatch();
+
+  const handleCityClick = (city: City) => {
+    dispatch(changeCity(city));
+  };
 
   return (
     <section className="locations container">
@@ -20,7 +28,7 @@ function CitiesList({currentCity, onCityClick}: CitiesListProps): JSX.Element {
                 'tabs__item--active': item.name === currentCity.name,
               })}
               href="/#"
-              onClick={() => onCityClick(item)}
+              onClick={() => handleCityClick(item)}
             >
               <span>{item.name}</span>
             </a>
