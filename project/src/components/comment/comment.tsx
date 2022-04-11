@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { Review } from '../../types/review';
 import { getRatingValue } from '../../utils';
 
@@ -7,6 +8,7 @@ type CommentProps = {
 
 function Comment ({review}: CommentProps): JSX.Element {
   const {id, user, rating, date, comment} = review;
+  const commentDate = dayjs(date).format('MMMM YYYY');
 
   return (
     <li key={id} className="reviews__item">
@@ -28,7 +30,7 @@ function Comment ({review}: CommentProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime="2019-04-24">{commentDate}</time>
       </div>
     </li>
   );
