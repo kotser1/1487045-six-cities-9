@@ -34,7 +34,7 @@ function MainContent({currentCity, offersInCurrentCity}: MainContentProps): JSX.
           <CardList offers={sortedOffers} onCardHover={handleCardHover} classType={'main'} />
         </section>
         <div className="cities__right-section">
-          <Map className="cities__map" city={currentCity} selectedOfferId={activeCard} />
+          <Map className="cities__map" offers={offersInCurrentCity} city={currentCity} selectedOfferId={activeCard} />
         </div>
       </div>
     </div>

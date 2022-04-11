@@ -150,6 +150,7 @@ function Property(): JSX.Element {
           </div>
           <Map
             className="property__map"
+            offers={nearOffers.concat(currentOffer)}
             city={city}
             selectedOfferId={currentId}
           />

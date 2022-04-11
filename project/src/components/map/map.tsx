@@ -2,13 +2,13 @@ import { useRef, useEffect } from 'react';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { useAppSelector } from '../../hooks';
 import useMap from '../../hooks/useMap';
-import { City } from '../../types/offer';
+import { City, Offer } from '../../types/offer';
 import { DEFAULT_MARKER_URL, CURRENT_MARKER_URL } from '../../const';
 import { getOffersInCurrentCity } from '../../utils';
 
 type MapProps = {
+  offers: Offer[];
   className: string;
   city: City;
   selectedOfferId: number | null;
@@ -26,8 +26,7 @@ function createIcon(iconUrl: string) {
 const defaultIcon = createIcon(DEFAULT_MARKER_URL);
 const currentIcon = createIcon(CURRENT_MARKER_URL);
 
-function Map({className, city, selectedOfferId}: MapProps): JSX.Element {
-  const offers = useAppSelector(({DATA}) => DATA.offers);
+function Map({offers, className, city, selectedOfferId}: MapProps): JSX.Element {
   const offersInCurrentCity = getOffersInCurrentCity(offers, city.name);
 
   const mapRef = useRef(null);
