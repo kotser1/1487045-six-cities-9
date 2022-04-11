@@ -13,6 +13,7 @@ import Spinner from '../../components/spinner/spinner';
 import { fetchOfferAction, fetchNearOffersAction, fetchReviewsAction } from '../../store/api-actions';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
 import { isAuth } from '../../utils';
+import { MAX_OFFER_IMAGES } from '../../const';
 
 function Property(): JSX.Element {
   const params = useParams();
@@ -55,6 +56,8 @@ function Property(): JSX.Element {
     city,
   } = currentOffer;
 
+  const imagesArr = images.slice(0, MAX_OFFER_IMAGES);
+
   return (
     <div className="page">
       <Header />
@@ -63,7 +66,7 @@ function Property(): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image) => (
+              {imagesArr.map((image) => (
                 <div className="property__image-wrapper" key={image}>
                   <img
                     className="property__image"
