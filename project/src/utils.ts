@@ -11,11 +11,11 @@ export const getSortedOffers = (sortType: string, offers: Offer[]) => {
     case SortTypes.Popular:
       return offers;
     case SortTypes.LowPrice:
-      return offers.sort((a: Offer, b: Offer) => a.price - b.price);
+      return [...offers].sort((a: Offer, b: Offer) => a.price - b.price);
     case SortTypes.HighPrice:
-      return offers.sort((a: Offer, b: Offer) => b.price - a.price);
+      return [...offers].sort((a: Offer, b: Offer) => b.price - a.price);
     case SortTypes.TopRated:
-      return offers.sort((a: Offer, b: Offer) => b.rating - a.rating);
+      return [...offers].sort((a: Offer, b: Offer) => b.rating - a.rating);
     default:
       return offers;
   }
