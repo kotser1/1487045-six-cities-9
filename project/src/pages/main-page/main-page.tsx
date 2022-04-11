@@ -7,10 +7,12 @@ import CitiesList from '../../components/cities-list/cities-list';
 
 import { useAppSelector } from '../../hooks/';
 import { getOffersInCurrentCity } from '../../utils';
+import { getOffers } from '../../store/offers-data/selectors';
+import { getCurrentCity } from '../../store/app-data/selectors';
 
 function MainPage(): JSX.Element {
-  const offers = useAppSelector(({DATA}) => DATA.offers);
-  const currentCity = useAppSelector(({APP}) => APP.city);
+  const offers = useAppSelector(getOffers);
+  const currentCity = useAppSelector(getCurrentCity);
 
   const offersInCurrentCity = getOffersInCurrentCity(offers, currentCity.name);
   const isEmpty = offersInCurrentCity.length === 0;

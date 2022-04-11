@@ -7,6 +7,7 @@ import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks/';
 import { getSortedOffers } from '../../utils';
 import { Offer, City } from '../../types/offer';
+import { getSortType } from '../../store/app-data/selectors';
 
 type MainContentProps = {
   currentCity: City;
@@ -14,7 +15,7 @@ type MainContentProps = {
 };
 
 function MainContent({currentCity, offersInCurrentCity}: MainContentProps): JSX.Element {
-  const currentSortType = useAppSelector(({APP}) => APP.sortType);
+  const currentSortType = useAppSelector(getSortType);
 
   const sortedOffers = getSortedOffers(currentSortType, offersInCurrentCity);
 

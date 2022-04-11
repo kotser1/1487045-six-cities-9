@@ -13,10 +13,12 @@ import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
 import { isCheckedAuth } from '../../utils';
 import browserHistory from '../../browser-history';
+import { getAuthorizationStatus } from '../../store/user-data/selectors';
+import { getLoadedDataStatus } from '../../store/offers-data/selectors';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
-  const isDataLoaded = useAppSelector(({DATA}) => DATA.isDataLoaded);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isDataLoaded = useAppSelector(getLoadedDataStatus);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (

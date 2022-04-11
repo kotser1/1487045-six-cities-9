@@ -14,16 +14,18 @@ import { fetchOfferAction, fetchNearOffersAction, fetchReviewsAction } from '../
 import { useAppSelector, useAppDispatch } from '../../hooks/';
 import { isAuth } from '../../utils';
 import { MAX_OFFER_IMAGES } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-data/selectors';
+import { getOffer, getLoadedOfferStatus, getNearOffers, getReviews } from '../../store/offers-data/selectors';
 
 function Property(): JSX.Element {
   const params = useParams();
   const currentId = Number(params.id);
 
-  const currentOffer = useAppSelector(({DATA}) => DATA.offer);
-  const isOfferLoaded = useAppSelector(({DATA}) => DATA.isOfferLoaded);
-  const nearOffers = useAppSelector(({DATA}) => DATA.nearOffers);
-  const reviews = useAppSelector(({DATA}) => DATA.reviews);
-  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+  const currentOffer = useAppSelector(getOffer);
+  const isOfferLoaded = useAppSelector(getLoadedOfferStatus);
+  const nearOffers = useAppSelector(getNearOffers);
+  const reviews = useAppSelector(getReviews);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const dispatch = useAppDispatch();
 

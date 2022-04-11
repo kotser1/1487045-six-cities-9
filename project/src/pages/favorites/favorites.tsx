@@ -6,9 +6,10 @@ import FavoritesList from '../../components/favorites-list/favorites-list';
 
 import { useAppSelector } from '../../hooks/';
 import { AppRoute } from '../../const';
+import { getOffers } from '../../store/offers-data/selectors';
 
 function Favorites(): JSX.Element {
-  const offers = useAppSelector(({DATA}) => DATA.offers);
+  const offers = useAppSelector(getOffers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const isEmpty = favoriteOffers.length === 0;
 
