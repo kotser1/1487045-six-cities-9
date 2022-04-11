@@ -9,8 +9,8 @@ import { useAppSelector } from '../../hooks/';
 import { getOffersInCurrentCity } from '../../utils';
 
 function MainPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const currentCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector(({DATA}) => DATA.offers);
+  const currentCity = useAppSelector(({APP}) => APP.city);
 
   const offersInCurrentCity = getOffersInCurrentCity(offers, currentCity.name);
   const isEmpty = offersInCurrentCity.length === 0;

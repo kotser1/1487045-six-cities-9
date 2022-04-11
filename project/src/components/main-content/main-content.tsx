@@ -14,7 +14,7 @@ type MainContentProps = {
 };
 
 function MainContent({currentCity, offersInCurrentCity}: MainContentProps): JSX.Element {
-  const currentSortType = useAppSelector((state) => state.sortType);
+  const currentSortType = useAppSelector(({APP}) => APP.sortType);
 
   const sortedOffers = getSortedOffers(currentSortType, offersInCurrentCity);
 

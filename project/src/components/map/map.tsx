@@ -27,7 +27,7 @@ const defaultIcon = createIcon(DEFAULT_MARKER_URL);
 const currentIcon = createIcon(CURRENT_MARKER_URL);
 
 function Map({className, city, selectedOfferId}: MapProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(({DATA}) => DATA.offers);
   const offersInCurrentCity = getOffersInCurrentCity(offers, city.name);
 
   const mapRef = useRef(null);

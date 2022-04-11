@@ -1,7 +1,7 @@
 import cn from 'classnames';
 
 import { useAppDispatch } from '../../hooks/';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/app-data/app-data';
 import { City } from '../../types/offer';
 import { CITIES } from '../../const';
 

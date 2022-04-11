@@ -15,8 +15,8 @@ import { isCheckedAuth } from '../../utils';
 import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+  const isDataLoaded = useAppSelector(({DATA}) => DATA.isDataLoaded);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (

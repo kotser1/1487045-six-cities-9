@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import cn from 'classnames';
 
 import { useAppDispatch } from '../../hooks';
-import { changeSortType } from '../../store/action';
+import { changeSortType } from '../../store/app-data/app-data';
 import { SortTypes } from '../../const';
 
 type SortingMenuProps = {

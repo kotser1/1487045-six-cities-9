@@ -6,8 +6,8 @@ import { AppRoute } from '../../const';
 import { isAuth } from '../../utils';
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userEmail = useAppSelector((state) => state.userEmail);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+  const userEmail = useAppSelector(({USER}) => USER.userEmail);
   const dispatch = useAppDispatch();
 
   return (

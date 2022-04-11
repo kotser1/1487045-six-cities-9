@@ -150,6 +150,12 @@ export enum HTTP_CODE {
   NOT_FOUND = 404,
 }
 
+export enum NameSpace {
+  app = 'APP',
+  data = 'DATA',
+  user = 'USER',
+}
+
 export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 300;
 export const RATING_WIDTH_PERCENT = 20;

@@ -18,11 +18,11 @@ function Property(): JSX.Element {
   const params = useParams();
   const currentId = Number(params.id);
 
-  const currentOffer = useAppSelector((state) => state.offer);
-  const isOfferLoaded = useAppSelector((state) => state.isOfferLoaded);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const reviews = useAppSelector((state) => state.reviews);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const currentOffer = useAppSelector(({DATA}) => DATA.offer);
+  const isOfferLoaded = useAppSelector(({DATA}) => DATA.isOfferLoaded);
+  const nearOffers = useAppSelector(({DATA}) => DATA.nearOffers);
+  const reviews = useAppSelector(({DATA}) => DATA.reviews);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
 
   const dispatch = useAppDispatch();
 

@@ -8,7 +8,7 @@ import { useAppSelector } from '../../hooks/';
 import { AppRoute } from '../../const';
 
 function Favorites(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(({DATA}) => DATA.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const isEmpty = favoriteOffers.length === 0;
 
